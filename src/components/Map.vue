@@ -5,9 +5,11 @@
 <script setup lang="ts">
 import { Map, View } from 'ol';
 import TileLayer from 'ol/layer/Tile';
-import { transform } from 'ol/proj';
 import OSM from 'ol/source/OSM';
 import { onMounted, ref } from 'vue';
+
+/** Хелперы */
+import { transformCoords } from '../mapHelpers';
 
 const mapContainer = ref<HTMLElement>()
 
@@ -20,7 +22,7 @@ onMounted(() => {
       })
     ],
     view: new View({
-      center: transform([30.313997419749427, 59.94440673743624], 'EPSG:4326', 'EPSG:3857'),
+      center: transformCoords([30.313997419749427, 59.94440673743624]),
       zoom: 12,
       showFullExtent: true,
       enableRotation: false,
@@ -33,10 +35,8 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-.basemap {
-  height: 100%;
-  width: 100%;
-  min-width: 100vh;
-  min-height: 80vh;
+.base-map {
+  min-height: 100%;
+  min-width: 100%;
 }
 </style>
