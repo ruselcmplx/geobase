@@ -9,7 +9,9 @@ import OSM from 'ol/source/OSM';
 import { onMounted, ref } from 'vue';
 
 /** Хелперы */
-import { transformCoords } from '../mapHelpers';
+import { transformCoords } from '@/mapHelpers';
+
+import FlagsLayer from '@/components/layers/FlagsLayer';
 
 const mapContainer = ref<HTMLElement>()
 
@@ -19,7 +21,8 @@ onMounted(() => {
     layers: [
       new TileLayer({
         source: new OSM()
-      })
+      }),
+      new FlagsLayer()
     ],
     view: new View({
       center: transformCoords([30.313997419749427, 59.94440673743624]),
